@@ -22,6 +22,7 @@ async def on_message(message):
 # COMMAND EXAMPLES
 @bot.command(name='command_name', description="description for help command")
 async def command(ctx, other_arguments_here):
+    print("")
     # Do stuff...
 
 bot.run(os.environ['BOT_TOKEN'])
