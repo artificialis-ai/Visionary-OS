@@ -11,7 +11,7 @@ async def on_ready():
     game = discord.Game("Open Sourcerers")
     await bot.change_presence(activity = game)
 
-@client.event
+@bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
