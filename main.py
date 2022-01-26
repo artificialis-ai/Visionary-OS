@@ -1,7 +1,6 @@
 import os
 import discord
 from discord.ext import commands
-
 import datetime
 import random
 from urllib import request, parse
@@ -43,7 +42,7 @@ async def on_command_error(ctx, error):
         print(error) 
 
 # Example of a command
-@bot.command(name='command_name', description="description for help command")
+@bot.command(name='command_name', description="Description for help command")
 async def command(ctx, other_arguments_here):
     pass # Do stuff here
 
