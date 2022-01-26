@@ -1,6 +1,7 @@
 import os
 import discord
 from discord.ext import commands
+from discord.ext import tasks
 import datetime
 import random
 from urllib import request, parse
@@ -12,11 +13,17 @@ start_time = datetime.datetime.now()
 with open("./assets/languages.json", "r") as f:
     languages = json.loads(f.read())
 
+# Task to keep heroku busy
+@tasks.loop(minutes=25.0)
+async def heroku_ping():
+    print("Ping!")
+
 # Event examples
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord')
     game = discord.Game("Open Sourcerers")
+    heroku_ping.start()
     await bot.change_presence(activity = game)
 
 @bot.listen('on_message')
