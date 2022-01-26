@@ -13,3 +13,6 @@ In our [main.py](main.py) we have specified
 bot.run(os.environ['BOT_TOKEN'])
 ```
 This means the bot is searching for an existing environment variable with the name `BOT_TOKEN`. So, now you just have to create it in your environment and start the bot as you would any python program.
+
+# How do we keep our integrity?
+Whenever you make a contribution and the final pull request, our Management Team will check your code. Any harmful, dangerous, against discord ToS PR will be rejected and the user will be **removed from the organization**.
