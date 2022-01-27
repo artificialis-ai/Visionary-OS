@@ -1,4 +1,3 @@
-from inspect import GEN_CREATED
 import os
 import discord
 from discord.ext import commands
@@ -212,12 +211,12 @@ async def blend(ctx, urlef:str = None, member:discord.Member=None, ratio=0.5):
 
 @bot.command()
 async def gen(ctx, *, text):
-    print(ctx.guild.name)
+    
     API_URL2 = "https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B"
     header2 = {"Authorization": f"Bearer {os.environ['transformers_auth']}"}
     payload2 = {
             "inputs": text,
-            "parameters": {"max_new_tokens": 100, "return_full_text": True},
+            "parameters": {"max_new_tokens": 160, "return_full_text": True},
         }
 
     output = await post_async(API_URL2, header2, payload2)
