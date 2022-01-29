@@ -12,3 +12,15 @@ class SendEmbed(discord.Embed):
 class ErrorEmbed(SendEmbed):
     def __init__(self, ctx, error):
         super().__init__(ctx, title="Error", description=error, color=discord.Color.red())
+
+class HelpEmbed(SendEmbed):
+    def __init__(self, ctx, commands):
+        super().__init__(ctx, title="Help", description="Here's a list of commands you can use. Use `{}help [command]` to get more info on a command.".format(ctx.prefix))
+        
+        for command in commands:
+            self.add_field(name=command.name, value=command.description)
+
+class CommandHelpEmbed(SendEmbed):
+    def __init__(self, ctx, command):
+        super().__init__(ctx, title="Help", description=f"Here's some info on the command `{command}`.")    
+        self.add_field(name="Usage", value=f"```{ctx.prefix + command.usage}```")    
