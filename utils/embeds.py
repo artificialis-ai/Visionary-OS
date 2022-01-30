@@ -18,9 +18,21 @@ class HelpEmbed(SendEmbed):
         super().__init__(ctx, title="Help", description="Here's a list of commands you can use. Use `{}help [command]` to get more info on a command.".format(ctx.prefix))
         
         for command in commands:
-            self.add_field(name=command.name, value=command.description)
+            if command.description:
+                desc = command.description 
+            else: 
+                desc = "No description available"
+            
+            self.add_field(name=command.name, value=desc)
 
 class CommandHelpEmbed(SendEmbed):
     def __init__(self, ctx, command):
-        super().__init__(ctx, title="Help", description=f"Here's some info on the command `{command}`.")    
-        self.add_field(name="Usage", value=f"```{ctx.prefix + command.usage}```")    
+        if command.description:
+            desc = command.description 
+        else: 
+            desc = "No description available"
+        
+        super().__init__(ctx, title=f"Help on `{command}`", description=desc)    
+        
+        if command.usage:
+            self.add_field(name="Usage", value=f"```{ctx.prefix + command.usage}```")    
