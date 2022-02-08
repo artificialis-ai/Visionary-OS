@@ -6,13 +6,19 @@ import random
 from urllib import request, parse
 import json
 
+# Import local library - see the utils folder
 import utils as ut
 
+# Initialize the bot
 bot = commands.Bot(command_prefix='$', case_insensitive=True)
+
+# Remove the default help command
 bot.remove_command('help')
 
+# Get the starting time to calculate uptime
 start_time = datetime.datetime.now()
 
+# Load the language file for translations
 with open("./assets/languages.json", "r") as f:
     languages = json.loads(f.read())
 
@@ -20,6 +26,7 @@ with open("./assets/languages.json", "r") as f:
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord')
+    
     game = discord.Game("Open Sourcerers")
     await bot.change_presence(activity = game)
 
@@ -47,31 +54,31 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.BotMissingPermissions):
         err = "I don't have sufficient permissions!"
     else:
-        # print("error not caught")
-        # print(error) 
-        raise error
-        # return
+        print("error not caught")
+        print(error) 
+        return
+        
+        # Comment the code above and uncomment the code below to get more accurate error mesages
+        # raise error
     
     embed = ut.embeds.ErrorEmbed(ctx, err)
     await ctx.send(embed=embed)
 
-# Example of a command
-@bot.command(name='command_name', description="Description for help command")
-async def command(ctx, other_arguments_here):
-    pass # Do stuff here
-
+# Uptime - send the difference between the current time and the starting time
 @bot.command(name='uptime', description="Get the time the bot has been online", usage="uptime")
 async def uptime(ctx):
     t = datetime.datetime.now() - start_time
     embed = ut.embeds.SendEmbed(ctx, "Uptime", str(t))
     await ctx.send(embed=embed)
 
+# 8ball - Pick a random answer from the list and send it
 @bot.command(name='8ball', description="Answers a yes/no question", usage="8ball <question>")
 async def ball(ctx, *, question):
     answers = ["Yes", "No", "I don't know", "Maybe", "Yep", "Nope", "Absolutley yes", "Absolutley no"]
     embed = ut.embeds.SendEmbed(ctx, question, random.choice(answers))
     await ctx.send(embed=embed)
 
+# Translate - Convert the languages to codes and access the Google Translate API
 @bot.command(name='translate', description="Translate some text to another language", usage="translate <language_from> <language_to> <text>")
 async def translate(ctx, language_from, language_to, *, text):
     if language_from not in languages.keys():
@@ -95,6 +102,7 @@ async def translate(ctx, language_from, language_to, *, text):
     embed = ut.embeds.SendEmbed(ctx, "Translated text", translated_text)
     await ctx.send(embed=embed)
 
+# Latex - Convert the LaTeX code to an image and send it using the codecogs API
 @bot.command(name="latex", description="Render some LaTeX", usage="latex <latex_code>")
 async def latex(ctx, *, latex):
     url = "https://latex.codecogs.com/gif.latex?\\bg_white&space;" + parse.quote(latex.replace("(", "\(").replace(")", "\)"))
@@ -118,4 +126,6 @@ async def help(ctx, command=None):
     
     await ctx.send(embed=embed)
 
+# Start the bot
+# IMPORTANT: Use your token here. 
 bot.run(os.environ['BOT_TOKEN'])
