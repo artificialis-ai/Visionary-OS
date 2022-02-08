@@ -85,3 +85,11 @@ The `HelpEmbed` class is used to send help embeds. It has 2 arguments:
 The `CommandHelpEmbed` class is used to send command help embeds. It has 2 arguments:
 * `ctx`: The context of the command.
 * `command`: The command to display. You need to pass a `Command` object.
+
+### API
+
+There is currently 1 api function - `APIRequest`. It has 5 arguments:
+* `base_url`: The URL that the request is sent to.
+* `params`: A dictionary of parameters to send. *optional*
+* `headers`: A dictionary of headers to send. *optional*
+* `return_json`: A boolean to return the json. Default is `True`. *optional*

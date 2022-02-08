@@ -90,13 +90,13 @@ async def translate(ctx, language_from, language_to, *, text):
     language_to = languages[language_to]
 
     try:
-        resp = request.urlopen(f"https://translate.googleapis.com/translate_a/single?client=gtx&sl={language_from}&tl={language_to}&dt=t&q={parse.quote_plus(text)}").read().decode("utf8")
+        resp = ut.api.APIRequest("https://translate.googleapis.com/translate_a/single", params={"client": "gtx", "sl": language_from, "tl": language_to, "dt": "t", "q": text})
     except:
         await ctx.send("An error occurred", "An error occurred. Please try again later.")
     
     translated_text = ""
     
-    for sentence in json.loads(resp)[0]:
+    for sentence in resp[0]:
         translated_text += sentence[0]
     
     embed = ut.embeds.SendEmbed(ctx, "Translated text", translated_text)
