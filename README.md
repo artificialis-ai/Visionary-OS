@@ -4,6 +4,7 @@ Our Visionary open source discord bot. Our goal is to create a discord bot, whic
 # How do I get started?
 - First, head over to our [Get Started guide](https://github.com/artificialis-ai/start-here-guidelines#get-started)
 - Afterwards, as you continue with your Visionary feature, you can take a look at their [Documentation](https://discordpy.readthedocs.io/en/stable/)
+- To understand the current framework, you can take a look at `For-Developers.md`
 - If you need inspiration, head over to open their [examples](https://github.com/Rapptz/discord.py/tree/master/examples)
 - After your pull request got accepted, you can head over to [our discord](https://discord.gg/GRpkfnZcUj) and tell everyone about the new feature! And don't forget to write about your experience through [our publication](https://medium.com/artificialis)
 

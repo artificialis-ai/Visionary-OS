@@ -1,5 +1,6 @@
 import discord
 
+# Embed class - an easyier way to create embeds
 class SendEmbed(discord.Embed):
     def __init__(self, ctx, title, description, color=0x253439, thumbnail=None, image=None):
         super().__init__(title=title, description=description, color=color)
